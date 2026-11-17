@@ -22,3 +22,4 @@ Push this folder to the GitHub repo connected to the Vercel project. No build st
 ## Check it works
 Open `https://<your-site>/api/posts`. `"source": "archive"` means it read Substack with pins.
 `"rss"` means the archive was unreachable (no pins). `"seed"` means neither worked and the starting lists are shown.
+
