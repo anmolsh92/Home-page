@@ -1,5 +1,16 @@
 {
   "functions": {
     "api/posts.js": { "maxDuration": 15 }
-  }
+  },
+  "rewrites": [
+    { "source": "/briefing-agent", "destination": "https://ai-briefing-assistant.vercel.app/briefing" },
+    { "source": "/briefing-agent/:path*", "destination": "https://ai-briefing-assistant.vercel.app/briefing/:path*" },
+
+    { "source": "/crm", "destination": "https://crm-dashboard-woad-kappa.vercel.app/" },
+    { "source": "/crm/:path*", "destination": "https://crm-dashboard-woad-kappa.vercel.app/:path*" },
+
+    { "source": "/cos-playbook", "destination": "https://chiefofstaffplaybook.vercel.app/" },
+    { "source": "/cos-playbook/:path*", "destination": "https://chiefofstaffplaybook.vercel.app/:path*" },
+    { "source": "/privacy.html", "destination": "https://chiefofstaffplaybook.vercel.app/privacy.html" }
+  ]
 }
