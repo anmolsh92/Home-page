@@ -1,0 +1,148 @@
+{
+  "publication": "https://anmolshrivastava.substack.com",
+  "min": 3,
+  "max": 6,
+  "pagesToFetch": 4,
+  "defaultCategory": "roi",
+  "useSectionPins": false,
+  "categories": {
+    "multiplayer": {
+      "label": "AI goes 'Multi-player'",
+      "seed": [
+        {
+          "slug": "what-is-multiplayer-ai-understanding",
+          "title": "What Is Multiplayer AI? Understanding the shift from AI Assistants to AI Teams"
+        },
+        {
+          "slug": "the-economics-of-multiplayer-ai-when",
+          "title": "The Economics of Multiplayer AI: When AI Knowledge Compounds"
+        },
+        {
+          "slug": "why-your-best-ai-employee-cant-scale",
+          "title": "Why Your Best AI Employee Can’t Scale AI Across the Company"
+        }
+      ]
+    },
+    "gtm": {
+      "label": "GTM in AI era",
+      "seed": [
+        {
+          "slug": "beyond-prompt-to-video-how-buyers",
+          "title": "Beyond Prompt-to-Video: How Buyers Should Evaluate AI Video Content Agents in 2026"
+        },
+        {
+          "slug": "ai-flattened-the-marketing-playbook",
+          "title": "AI flattened the Marketing Playbook. Smart agentic systems will bring the spark back"
+        },
+        {
+          "slug": "the-fragile-ground-beneath-ai-startups",
+          "title": "Fragile Ground Beneath AI Startups: Building MOAT a myth?"
+        }
+      ]
+    },
+    "roi": {
+      "label": "ROI through AI",
+      "seed": [
+        {
+          "slug": "from-prompt-engineering-to-context",
+          "title": "From Prompt Engineering to Context Engineering: The Next AI Interface"
+        },
+        {
+          "slug": "when-ai-agents-fail-to-deliver-missing",
+          "title": "Why AI Agents often fail: Missing or Inadequate Data Exchange Layer"
+        },
+        {
+          "slug": "eroded-customization-superpower-for",
+          "title": "Eroded customization advantage for Indian IT industry: Time for the Next Leap"
+        }
+      ]
+    },
+    "misc": {
+      "label": "Misc & Fun lessons",
+      "seed": [
+        {
+          "slug": "victory-isnt-just-won-on-the-court",
+          "title": "Victory isn’t just won on the court, it’s won in the mind first."
+        },
+        {
+          "slug": "mighty-west-indies-and-formidable",
+          "title": "Mighty West Indies & Formidable Aussies: Contrasting drivers of team spirit"
+        },
+        {
+          "slug": "how-stories-make-nations-fall-in",
+          "title": "How Stories Make Nations Fall in Love with Sports"
+        },
+        {
+          "slug": "the-australian-playbook-tech-meets",
+          "title": "The Australian Playbook: Tech Meets Grit in Sports"
+        }
+      ]
+    }
+  },
+  "hide": [
+    "coming-soon"
+  ],
+  "overrides": {},
+  "sections": {
+    "Spectacles of Sports": "misc",
+    "The Creative Chronicles": "misc"
+  },
+  "tags": {
+    "Learnings from Sports": "misc",
+    "Creative masterpiece": "misc"
+  },
+  "keywords": [
+    {
+      "category": "multiplayer",
+      "words": [
+        "multiplayer",
+        "multi-player"
+      ]
+    },
+    {
+      "category": "misc",
+      "words": [
+        "sport",
+        "cricket",
+        "football",
+        "tennis",
+        "olympic",
+        "film",
+        "movie",
+        "cinema",
+        "story",
+        "stories",
+        "nation",
+        "panel",
+        "discussion"
+      ]
+    },
+    {
+      "category": "gtm",
+      "words": [
+        "gtm",
+        "go-to-market",
+        "marketing",
+        "buyer",
+        "sales",
+        "startup",
+        "moat",
+        "brand",
+        "campaign",
+        "video"
+      ]
+    },
+    {
+      "category": "roi",
+      "words": [
+        "roi",
+        "economics",
+        "cost",
+        "data",
+        "orchestration",
+        "automation",
+        "it industry"
+      ]
+    }
+  ]
+}
