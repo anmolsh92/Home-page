@@ -1,0 +1,280 @@
+<!doctype html>
+<!-- Lead: 2 Doodle docs · Format: monochrome · Borrowed: none -->
+<html lang="en" data-theme="monochrome">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in · Anmol Shrivastava</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Kalam:wght@300;400;700&family=Nanum+Pen+Script&family=Patrick+Hand+SC&family=Inter:wght@400;600&display=swap">
+<style>
+  :root{
+    --paper:#ffffff; --paper-raised:#f5f5f3; --ink:#141414; --ink-muted:#555555; --rule:#141414;
+    --accent:#141414; --on-accent:#ffffff; --marker:#e4e4e1; --pen:#141414; --stage:#efefec;
+    --font-doodle:"Gloria Hallelujah",cursive; --font-hand:"Kalam","Patrick Hand",cursive;
+    --font-pen:"Nanum Pen Script",cursive; --font-label:"Patrick Hand SC","Kalam",cursive;
+    --font-sans:"Inter",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{min-height:100vh;display:flex;flex-direction:column;background:var(--paper);color:var(--ink);font:400 18px/28px var(--font-hand)}
+
+  header{display:flex;justify-content:space-between;align-items:center;gap:16px;max-width:1080px;width:100%;margin:0 auto;padding:24px 32px;border-bottom:1px dashed var(--rule)}
+  .wordmark{font:400 24px/1.2 var(--font-doodle);color:var(--ink);text-decoration:none;white-space:nowrap}
+  .back{font:700 16px var(--font-hand);color:var(--ink);text-decoration:none;white-space:nowrap}
+  .back:hover{text-decoration:underline}
+
+  main{flex:1;display:grid;grid-template-columns:1fr 420px;gap:56px;align-items:center;max-width:1080px;width:100%;margin:0 auto;padding:56px 32px 80px}
+
+  .intro .eyebrow{font:400 14px/18px var(--font-label);letter-spacing:.12em;color:var(--ink-muted);margin:0 0 12px}
+  .intro h2{font:400 52px/1.25 var(--font-doodle);margin:0 0 16px}
+  .hl{position:relative;display:inline-block;padding:0 8px;margin:0 -8px}
+  .hl::before{content:"";position:absolute;inset:18% 0 12% 0;background:var(--marker);border-radius:3px 9px 4px 11px / 9px 3px 10px 4px;transform:rotate(-1.2deg);z-index:-1}
+  .intro p{font:300 22px/32px var(--font-hand);color:var(--ink-muted);margin:0;max-width:420px}
+  .doodle{position:relative;margin-top:24px;display:flex;align-items:flex-end;gap:8px}
+  .person{width:180px;height:180px;color:var(--ink)}
+  .pen-note{font:400 34px/32px var(--font-pen);color:var(--pen);margin:0 0 70px;display:flex;align-items:center;gap:6px}
+  .arrow{width:64px;height:40px}
+
+  .card{background:var(--paper-raised);border:2px solid var(--rule);border-radius:16px;padding:32px 32px 26px}
+  .card h1{font:400 36px/1.3 var(--font-doodle);margin:0;display:inline-block;position:relative}
+  .title-wrap{display:inline-block;margin-bottom:8px}
+  .underline{display:block;width:calc(100% + 16px);height:14px;color:var(--ink);margin:-4px 0 0 -6px}
+  .lead{margin:0 0 20px;color:var(--ink-muted);font-size:16px;line-height:24px}
+
+  label{display:block;font:700 16px/22px var(--font-hand);margin:0 0 6px}
+  input{width:100%;height:48px;padding:0 14px;margin:0 0 16px;border:2px solid var(--ink);border-radius:10px;background:var(--paper);color:var(--ink);font:400 15px var(--font-sans)}
+  input:focus{outline:2px solid var(--ink);outline-offset:2px}
+
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:50px;border-radius:9999px;cursor:pointer;font:700 17px/1 var(--font-hand)}
+  .btn:focus-visible,.switch button:focus-visible,a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .btn-primary{background:var(--accent);color:var(--on-accent);border:2px solid var(--accent);margin-top:4px}
+  .btn-primary:hover{background:#2b2b2b}
+  .btn-outline{background:var(--paper);color:var(--ink);border:2px solid var(--ink)}
+  .btn-outline:hover{background:var(--ink);color:var(--paper)}
+  .btn[disabled]{opacity:.6;cursor:wait}
+
+  .or{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--ink-muted);font:400 16px var(--font-label)}
+  .or::before,.or::after{content:"";flex:1;border-top:1px dashed var(--rule)}
+
+  .switch{margin:20px 0 0;padding-top:16px;border-top:1px dashed var(--rule);text-align:center;color:var(--ink-muted);font-size:16px}
+  .switch button{background:none;border:0;padding:0;color:var(--ink);font:700 16px var(--font-hand);cursor:pointer;text-decoration:underline;text-decoration-style:wavy;text-underline-offset:4px}
+
+  .msg{display:none;margin:0 0 16px;padding:10px 14px;border:1.5px dashed var(--ink);border-radius:10px;background:var(--paper);font:400 14px/20px var(--font-sans)}
+  .msg.show{display:block}
+  .msg.error{border-style:solid}
+  .inline-link{background:none;border:0;padding:0;color:var(--ink);font:600 14px var(--font-sans);text-decoration:underline;cursor:pointer}
+
+  dialog{width:min(420px,calc(100% - 40px));padding:32px 28px 26px;border:2px solid var(--rule);border-radius:16px;background:var(--paper);color:var(--ink);text-align:center}
+  dialog::backdrop{background:rgba(20,20,20,.35)}
+  dialog .mail{width:96px;height:68px;color:var(--ink);margin:0 auto 8px;display:block}
+  dialog h2{font:400 34px/1.3 var(--font-doodle);margin:0 0 12px}
+  dialog p{margin:0 0 10px;font:400 17px/26px var(--font-hand)}
+  dialog .hint{color:var(--ink-muted);font-size:15px;margin-bottom:20px}
+  dialog strong{word-break:break-all}
+
+  @media (max-width:860px){
+    main{grid-template-columns:1fr;gap:32px;padding:32px 20px 56px}
+    .intro h2{font-size:40px}
+    .doodle{display:none}
+    .card{padding:26px 20px 22px}
+  }
+  @media (max-width:420px){
+    header{padding:18px 20px}
+    .wordmark{font-size:20px}
+  }
+</style>
+</head>
+<body>
+  <header>
+    <a class="wordmark" href="/">Anmol Shrivastava</a>
+    <a class="back" href="/">← Back to home</a>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="eyebrow">ONE LOGIN · EVERY PROJECT</p>
+      <h2>Come on in.<br><span class="hl">Grab a seat.</span></h2>
+      <p>Sign in once and you can open any of my projects without logging in again.</p>
+      <div class="doodle">
+        <svg class="person" role="img" aria-label="doodle person waving hello" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" >
+<path d="M216.9 140.0 C217.0 157.3 210.2 179.0 198.7 192.2 C187.3 205.5 166.0 215.6 148.4 219.7 C130.7 223.7 108.8 222.3 92.8 216.5 C76.8 210.7 63.5 197.7 52.3 184.9 C41.0 172.2 26.4 155.7 25.3 140.0 C24.3 124.3 35.1 104.8 46.0 90.9 C56.8 77.0 73.3 61.2 90.2 56.4 C107.2 51.6 129.8 56.6 147.8 61.9 C165.7 67.2 186.5 75.2 198.0 88.2 C209.6 101.2 216.7 122.7 216.9 140.0 Z" class="blob" fill="currentColor" fill-opacity=".14"/>
+<path d="M109.5 182.7 C109.1 185.9 108.3 195.2 107.6 201.8 C106.8 208.4 105.5 219.0 105.1 222.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M129.3 182.1 C130.0 185.3 132.7 194.7 133.7 201.4 C134.8 208.2 135.4 218.9 135.7 222.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M110.7 224.0 C110.7 225.1 108.6 226.7 106.8 227.4 C105.1 228.2 102.4 228.5 100.0 228.6 C97.6 228.6 94.3 228.5 92.5 227.7 C90.7 227.0 89.3 225.2 89.4 224.0 C89.5 222.8 91.2 221.3 93.0 220.5 C94.8 219.7 97.7 219.4 100.0 219.4 C102.3 219.4 104.9 219.9 106.6 220.7 C108.4 221.4 110.7 222.9 110.7 224.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M150.3 224.0 C150.1 225.2 148.5 226.5 146.8 227.4 C145.1 228.3 142.3 229.4 140.0 229.5 C137.7 229.5 134.4 228.5 132.8 227.6 C131.2 226.7 130.6 225.2 130.6 224.0 C130.6 222.8 131.1 221.2 132.7 220.4 C134.3 219.5 137.5 219.2 140.0 219.1 C142.5 219.1 146.0 219.3 147.7 220.2 C149.4 221.0 150.4 222.8 150.3 224.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M98.0 140.0 C93.7 144.3 94.3 154.7 94.0 162.0 C93.7 169.3 91.7 179.8 96.0 184.0 C100.3 188.2 112.0 187.0 120.0 187.0 C128.0 187.0 139.7 188.2 144.0 184.0 C148.3 179.8 146.3 169.3 146.0 162.0 C145.7 154.7 146.3 144.3 142.0 140.0 C137.7 135.7 127.3 136.0 120.0 136.0 C112.7 136.0 102.3 135.7 98.0 140.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M115.0 150.0 C115.2 153.4 116.1 167.1 116.3 170.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".55"/>
+<path d="M98.7 147.1 C97.1 149.2 90.3 154.6 88.9 159.7 C87.5 164.7 90.0 174.6 90.2 177.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M95.6 178.0 C95.6 179.3 94.2 180.8 93.0 181.8 C91.8 182.8 90.0 184.2 88.6 184.0 C87.3 183.7 85.5 181.8 85.0 180.4 C84.5 179.1 85.0 177.2 85.6 175.9 C86.2 174.5 87.4 172.7 88.7 172.4 C90.0 172.1 92.1 173.0 93.2 173.9 C94.4 174.9 95.7 176.7 95.6 178.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M141.3 146.0 C144.2 142.5 154.5 134.9 159.1 125.3 C163.7 115.7 167.3 94.6 168.9 88.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M172.7 88.0 C172.8 89.5 172.7 91.9 171.7 92.7 C170.8 93.4 168.4 93.0 167.0 92.6 C165.5 92.2 164.0 91.5 163.3 90.3 C162.5 89.1 161.9 86.6 162.4 85.3 C163.0 84.0 165.3 82.7 166.7 82.4 C168.2 82.2 170.2 83.0 171.2 84.0 C172.2 84.9 172.6 86.5 172.7 88.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M119.7 127.7 C119.6 129.6 119.2 137.3 119.1 139.2" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M163.5 84.0 C163.5 92.9 162.3 103.0 158.3 110.8 C154.4 118.6 147.1 127.1 139.7 130.8 C132.2 134.5 122.1 134.0 113.5 132.9 C104.9 131.7 94.2 129.8 88.1 124.0 C82.1 118.1 79.7 106.8 77.2 97.7 C74.7 88.5 71.5 78.0 73.3 69.1 C75.2 60.2 81.8 50.4 88.5 44.4 C95.1 38.5 104.7 34.8 113.3 33.5 C121.9 32.2 132.5 32.5 140.0 36.4 C147.5 40.3 154.5 49.2 158.5 57.1 C162.4 65.1 163.6 75.1 163.5 84.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M168.6 83.0 C168.6 92.2 165.7 103.1 160.9 110.6 C156.2 118.0 147.9 124.2 140.2 127.7 C132.6 131.1 123.3 132.4 115.1 131.3 C106.9 130.2 97.2 126.9 91.2 121.1 C85.1 115.3 80.6 105.1 78.9 96.6 C77.1 88.1 78.8 78.7 80.8 70.0 C82.8 61.3 85.3 50.3 91.0 44.7 C96.8 39.0 107.1 37.1 115.3 36.1 C123.5 35.1 132.6 35.3 140.2 38.5 C147.8 41.7 156.1 48.0 160.9 55.5 C165.6 62.9 168.6 73.8 168.6 83.0 Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".55"/>
+<path d="M75 80 q-10 4 -2 16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M165 80 q10 4 2 16" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M92.1 49.0 C92.0 50.9 90.5 53.2 88.8 54.4 C87.2 55.5 84.4 56.2 82.2 55.9 C80.0 55.6 76.7 54.3 75.7 52.6 C74.7 50.9 75.2 47.5 76.2 45.7 C77.3 43.9 79.9 42.2 82.1 41.8 C84.4 41.3 87.9 41.6 89.5 42.8 C91.2 44.0 92.2 47.1 92.1 49.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M106.2 46.0 C106.1 48.0 103.2 50.5 101.2 51.8 C99.2 53.1 96.4 53.9 94.1 53.6 C91.7 53.3 88.0 51.7 87.0 49.9 C85.9 48.0 86.4 44.3 87.6 42.4 C88.8 40.6 91.8 39.2 94.1 38.7 C96.5 38.3 99.6 38.6 101.6 39.8 C103.6 41.0 106.2 44.0 106.2 46.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M116.9 43.0 C116.8 45.0 114.8 47.3 113.0 48.6 C111.2 49.8 108.2 50.9 106.1 50.5 C104.0 50.1 101.5 48.2 100.4 46.3 C99.2 44.4 98.2 41.0 99.1 39.2 C100.1 37.4 103.6 36.1 106.1 35.6 C108.6 35.2 112.1 35.2 113.9 36.4 C115.7 37.7 117.1 41.0 116.9 43.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M130.3 40.0 C130.4 42.2 128.4 45.8 126.3 47.0 C124.3 48.3 120.5 48.1 118.1 47.5 C115.6 46.9 112.6 45.4 111.6 43.6 C110.7 41.8 111.3 38.6 112.3 36.7 C113.4 34.9 115.8 32.9 118.1 32.4 C120.3 31.9 123.6 32.5 125.6 33.8 C127.6 35.0 130.1 37.8 130.3 40.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M141.8 43.0 C142.0 45.1 140.3 48.9 138.3 50.1 C136.4 51.3 132.3 51.0 130.1 50.3 C127.9 49.6 126.1 47.7 125.1 46.0 C124.1 44.2 123.2 41.2 124.0 39.6 C124.9 38.0 128.1 36.6 130.3 36.2 C132.4 35.9 134.9 36.5 136.8 37.6 C138.7 38.8 141.5 40.9 141.8 43.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M153.7 46.0 C153.8 47.8 150.9 50.1 149.0 51.5 C147.0 52.9 144.0 54.7 141.9 54.3 C139.7 53.9 137.4 51.4 136.2 49.3 C135.1 47.3 133.9 44.1 134.8 42.1 C135.8 40.1 139.4 37.6 141.8 37.4 C144.1 37.1 146.9 39.1 148.9 40.6 C150.9 42.0 153.7 44.2 153.7 46.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M164.2 49.0 C164.3 51.2 164.1 54.7 162.4 56.1 C160.7 57.4 156.3 57.7 153.9 57.1 C151.5 56.4 149.2 54.4 148.1 52.4 C147.0 50.4 146.2 47.2 147.2 45.2 C148.2 43.2 151.4 40.9 153.8 40.5 C156.2 40.1 159.9 41.3 161.6 42.8 C163.3 44.2 164.0 46.8 164.2 49.0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<circle cx="103" cy="82" r="3.6" fill="currentColor"/><circle cx="137" cy="82" r="3.6" fill="currentColor"/>
+<path d="M94 64 q8 -8 16 -2" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M130 62 q8 -6 16 2" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M122 88 q-9 12 1 15" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M100 108 q20 26 40 0 q-20 6 -40 0 Z" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<path d="M84 102 l4 3 M88 100 l4 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".55"/>
+<path d="M150 102 l4 3 M154 100 l4 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".55"/>
+<path d="M172 60 q8 -8 4 -18 M186 70 q12 -10 6 -26 M200 82 q16 -12 8 -34" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".55"/>
+</svg>
+        <p class="pen-note" aria-hidden="true">
+          <svg class="arrow" viewBox="0 0 64 40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 30c14-14 32-20 54-16"/><path d="M48 6l10 8-11 6"/></svg>
+          sign in here
+        </p>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="title">
+      <div class="title-wrap"><h1 id="title">Sign in</h1>
+      <svg class="underline" aria-hidden="true" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14c40-6 90-8 140-6s100 4 150-2"/><path d="M20 22c50-5 110-6 170-4 34 1 60 2 84-1"/></svg></div>
+      <p class="lead" id="lead">Welcome back. Pick up where you left off.</p>
+
+      <p class="msg" id="msg" role="status" aria-live="polite"></p>
+
+      <button class="btn btn-outline" id="google" type="button">
+        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/></svg>
+        Continue with Google
+      </button>
+
+      <div class="or">or</div>
+
+      <form id="form" novalidate>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="email" required>
+
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" minlength="6" required>
+
+        <button class="btn btn-primary" id="submit" type="submit">Sign in</button>
+      </form>
+
+      <p class="switch">
+        <span id="switch-text">New here?</span>
+        <button type="button" id="switch">Create an account</button>
+      </p>
+    </section>
+  </main>
+
+  <dialog id="check-email" aria-labelledby="ce-title">
+    <svg class="mail" viewBox="0 0 120 84" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14c33-2 67-2 100 0 1 19 1 38 0 58-33 2-67 2-100 0-2-20-2-39 0-58z"/><path d="M11 16c16 13 32 25 49 34 17-9 33-21 49-34"/><path d="M12 70c13-11 25-20 36-27M108 70c-13-11-25-20-36-27"/></svg>
+    <h2 id="ce-title">Go check your email</h2>
+    <p>We sent a confirmation link to <strong id="sent-to"></strong>. Click it to finish creating your account.</p>
+    <p class="hint">Can't find it? Look in your spam folder.</p>
+    <form method="dialog"><button class="btn btn-primary" type="submit" autofocus>Got it</button></form>
+  </dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Portfolio showcase project. The publishable key is safe to ship in the browser.
+  const SUPABASE_URL = "https://yowvtdbqacltmilxkfsq.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_pD2ZF-OmCU5Ft1XPaslOOg_jnogHTWX";
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // Where to send people after login: /login?next=/crm-dashboard
+  // Only same-site paths are allowed, so the page can't be used as an open redirect.
+  function nextPath(){
+    const n = new URLSearchParams(location.search).get("next") || "/";
+    return (n.startsWith("/") && !n.startsWith("//") && !n.startsWith("/\\")) ? n : "/";
+  }
+  const NEXT = nextPath();
+  const RETURN_URL = location.origin + "/login?next=" + encodeURIComponent(NEXT);
+  const go = () => location.replace(NEXT);
+
+  const $ = id => document.getElementById(id);
+  let mode = "signin";
+
+  function show(text, kind){ const m = $("msg"); m.textContent = text; m.className = "msg show " + kind; }
+  function showNoAccount(){
+    const m = $("msg");
+    m.innerHTML = 'No account exists with this email. <button type="button" class="inline-link" id="to-signup">Create an account</button>';
+    m.className = "msg show error";
+    $("to-signup").addEventListener("click", () => { setMode("signup"); $("password").focus(); });
+  }
+  function openCheckEmail(email){
+    $("sent-to").textContent = email;
+    $("check-email").showModal();
+  }
+  document.getElementById("check-email").addEventListener("close", () => { setMode("signin"); $("password").value = ""; });
+  function clear(){ $("msg").className = "msg"; }
+
+  function setMode(m){
+    mode = m; clear();
+    const up = m === "signup";
+    $("title").textContent = up ? "Create an account" : "Sign in";
+    $("lead").textContent = up ? "Takes a few seconds. No card needed." : "Welcome back. Pick up where you left off.";
+    $("submit").textContent = up ? "Create account" : "Sign in";
+    $("switch-text").textContent = up ? "Already have an account?" : "New here?";
+    $("switch").textContent = up ? "Sign in" : "Create an account";
+    $("password").autocomplete = up ? "new-password" : "current-password";
+  }
+  $("switch").addEventListener("click", () => setMode(mode === "signin" ? "signup" : "signin"));
+
+  // Already signed in (or just back from Google / email confirmation) → continue.
+  sb.auth.getSession().then(({ data }) => { if (data.session) go(); });
+  sb.auth.onAuthStateChange((event, session) => { if (session && event === "SIGNED_IN") go(); });
+
+  $("google").addEventListener("click", async () => {
+    clear();
+    const { error } = await sb.auth.signInWithOAuth({ provider: "google", options: { redirectTo: RETURN_URL } });
+    if (error) show(error.message, "error");
+  });
+
+  $("form").addEventListener("submit", async (e) => {
+    e.preventDefault(); clear();
+    const email = $("email").value.trim();
+    const password = $("password").value;
+    if (!email || !password) return show("Please enter your email and password.", "error");
+    if (mode === "signup" && password.length < 6) return show("Use at least 6 characters for the password.", "error");
+
+    const btn = $("submit"); btn.disabled = true;
+    try {
+      if (mode === "signin") {
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        if (error) {
+          if (/not confirmed/i.test(error.message)) {
+            return show("Your email isn't confirmed yet. Open the link we emailed you, then sign in.", "error");
+          }
+          if (/invalid login credentials/i.test(error.message)) {
+            const { data: exists } = await sb.rpc("account_exists", { p_email: email });
+            if (exists === false) {
+              return showNoAccount();
+            }
+            return show("That password doesn't match. Please try again.", "error");
+          }
+          throw error;
+        }
+        go();
+      } else {
+        const { data, error } = await sb.auth.signUp({ email, password, options: { emailRedirectTo: RETURN_URL } });
+        if (error) throw error;
+        // Supabase returns a user with no identities when the email is already registered.
+        if (data.user && data.user.identities && data.user.identities.length === 0) {
+          return show("An account with this email already exists. Sign in instead.", "error");
+        }
+        if (data.session) go();
+        else openCheckEmail(email);
+      }
+    } catch (err) {
+      show(err.message || "Something went wrong. Please try again.", "error");
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
