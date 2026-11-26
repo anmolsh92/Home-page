@@ -449,6 +449,13 @@ a.pin:active .pin__paper{box-shadow:none}
 .soon{margin-top:var(--space-7);min-height:440px;justify-content:center;padding:var(--space-8) var(--space-7)}
 .soon h1{margin:0;max-width:760px;font-size:clamp(48px,7vw,84px);line-height:.98}
 .soon p{margin:0;max-width:520px}
+.fn{padding-top:var(--space-7);padding-bottom:var(--space-8);display:flex;flex-direction:column;gap:var(--space-6)}
+.fn__head h1{margin:var(--space-3) 0;font-size:clamp(48px,7vw,84px);line-height:.98}
+.fn__head p{margin:0;max-width:560px}
+.fn__note{text-decoration:none;max-width:760px;padding:var(--space-7) var(--space-6);transition:transform .15s steps(2)}
+.fn__note h2,.fn__note p{margin:0}
+.fn__note:hover{transform:translate(-2px,-2px) rotate(-.5deg)}
+.fn__cta{align-self:flex-start;pointer-events:none}
 
 /* ---------- Responsive ---------- */
 @media (max-width:900px){
@@ -597,13 +604,18 @@ a.pin:active .pin__paper{box-shadow:none}
 
 <!-- ================= GTM FIELD NOTES VIEW ================= -->
 <div class="view" id="view-field-notes" hidden>
-  <section class="wrap">
-    <div class="placard soon bg-lemon">
+  <section class="wrap fn">
+    <div class="fn__head">
       <span class="label">GTM field notes</span>
-      <h1 class="display-xl">Notes from the <span class="mk mk-ink mk-wave">trenches</span></h1>
-      <p class="body-lg">Short, honest notes from running go-to-market. The first ones land soon.</p>
-      <div><a class="btn btn--teal" href="#writings">Read my essays meanwhile</a></div>
+      <h1 class="display-xl">Notes from the <span class="mk mk-wave">trenches</span></h1>
+      <p class="body-lg">Short, honest notes from running go-to-market with India's top brand and content teams.</p>
     </div>
+    <a class="placard bg-sun shadow-stack fn__note" href="/field-notes/ai-content-demand/">
+      <span class="label">AI content · D2C, FMCG, fashion</span>
+      <h2 class="display-lg">Demand isn't <span class="mk mk-ink mk-circle">readiness</span></h2>
+      <p class="body-lg">Brands want AI content, but few are ready to make it themselves. Managed services vs in-house creative teams.</p>
+      <span class="btn bg-cocoa fn__cta">Read the note</span>
+    </a>
   </section>
 </div>
 
