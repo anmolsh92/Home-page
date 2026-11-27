@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stop networking. Start listening. · GTM field notes · Anmol Shrivastava</title>
+<meta name="description" content="Why early-stage companies should use events to collect frank market feedback, and how we tracked it.">
+<meta property="og:title" content="Stop networking. Start listening.">
+<meta property="og:description" content="Use events to collect frank market feedback that secondary research can't give you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Shantell+Sans:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap">
+<style>
+/* VOICE  a founder's field notebook, candid and plain, written in the margin
+   IDEA   a looseleaf sheet pinned on a teal desk
+   PICTURE the full sheet the Stop networking card opens into
+   COLOUR and TYPE  Handwritten Style tokens, teal desk, paper, graphite ink
+   LAYOUT a single paper column with sticky section links */
+
+:root{
+  color-scheme:light;
+  --background:#a8c8bb;--surface-container-low:#9db8ae;--surface-container:#f8f2de;
+  --surface-container-high:#f8f5ee;--surface-container-highest:#fbf8f1;
+  --on-surface:#2a2420;--on-surface-variant:#4a423b;--on-surface-muted:#4a433c;--outline:#2a242040;
+  --primary:#2c4f9e;--on-primary:#fff;--secondary:#df6b3c;--tertiary:#dcc8a3;--button-fill:#b2c3dc;
+  --space-xs:4px;--space-sm:8px;--space-md:12px;--space-lg:24px;--space-xl:36px;--space-section:96px;
+  --shadow-paper:0 10px 20px -8px rgba(58,44,30,.22);--control-height:32px;--pen-width:2px;
+  --dur-quick:.12s;--dur-base:.15s;--dur-slow:.3s;
+  --ease-standard:cubic-bezier(.4,0,.2,1);--ease-spring:cubic-bezier(.2,.9,.25,1.12);--ease-enter:cubic-bezier(0,0,.2,1);
+  --font-script:"Kevin Sans Script","Caveat","Bradley Hand",cursive;
+  --font-hand:"Kevin Sans Hand","Patrick Hand","Bradley Hand",cursive;
+  --font-type:"Kevin Sans Type","Shantell Sans",system-ui,sans-serif;
+}
+:root[data-theme=light],:root[data-theme=dark]{color-scheme:light}
+*,*::before,*::after{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+body{margin:0;background:var(--background);color:var(--on-surface);font:400 17px/1.55 var(--font-hand);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--on-surface);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{text-decoration-color:var(--primary)}
+::selection{background:var(--button-fill)}
+:focus-visible{outline:2px dashed var(--primary);outline-offset:3px}
+
+/* pen line */
+.ink{position:relative;border:var(--pen-width) solid var(--on-surface)}
+.ink::after{content:"";position:absolute;inset:-3px -1px -1px -3px;border:1.5px solid var(--on-surface);opacity:.45;transform:rotate(-.5deg);pointer-events:none}
+
+/* type */
+.display{font:700 clamp(56px,9vw,96px)/.95 var(--font-script);letter-spacing:-.025em;margin:0;text-wrap:balance}
+.h-lg{font:700 clamp(40px,6vw,60px)/1.02 var(--font-script);margin:0;text-wrap:balance}
+.h-md{font:700 36px/1.15 var(--font-script);margin:0;text-wrap:balance}
+.h-sm{font:700 30px/1 var(--font-script);margin:0}
+.label-lg{font:600 21px/1 var(--font-script)}
+.small{font:400 14px/1.43 var(--font-type);letter-spacing:.025em}
+.muted{color:var(--on-surface-muted)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:var(--space-sm);height:44px;padding:0 var(--space-lg);font:600 21px/1 var(--font-script);color:var(--on-surface);background:var(--button-fill);cursor:pointer;text-decoration:none;transition:transform var(--dur-quick) var(--ease-spring)}
+.btn:hover{transform:translateY(-1px) rotate(-.4deg)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px dashed var(--primary);outline-offset:4px}
+.btn--primary{background:var(--primary);color:var(--on-primary);font-weight:700}
+.btn--ghost{background:transparent;border-color:transparent;font:700 16px/1 var(--font-hand);height:44px;padding:0 var(--space-md);color:var(--on-surface)}
+.btn--ghost::after{display:none}
+.btn--ghost:hover{background:var(--surface-container-low)}
+
+/* stickers */
+.sticker{display:inline-flex;align-items:center;height:26px;padding:0 var(--space-sm);font:700 15px/1 var(--font-hand);border:var(--pen-width) solid var(--on-surface);background:var(--surface-container-highest);color:var(--on-surface)}
+.sticker--kraft{background:var(--tertiary)}
+.sticker--blue{background:var(--primary);color:var(--on-primary)}
+.sticker--riso{background:var(--secondary);font-size:19px;height:30px;transform:rotate(-3deg)}
+
+.circled{position:relative;display:inline-block;padding:0 8px}
+.circled::before{content:"";position:absolute;inset:-6px -8px;border:var(--pen-width) solid var(--secondary);border-radius:50%;transform:rotate(-6deg);pointer-events:none}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 max(5vw,16px)}
+
+
+
+/* article */
+.article{display:block;padding:var(--space-lg) 0 var(--space-section)}
+@keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.toc{position:sticky;top:0;z-index:2;background:var(--background);padding:var(--space-sm) 0;border-bottom:var(--pen-width) solid var(--on-surface)}
+.toc .row{display:flex;gap:var(--space-xs);overflow-x:auto;align-items:center}
+.toc a{flex:none;font:700 16px/1 var(--font-hand);text-decoration:none;padding:10px var(--space-md);min-height:44px;display:inline-flex;align-items:center}
+.toc a:hover{background:var(--surface-container-low)}
+@media(max-width:900px){.toc{position:static}}
+
+.sheet{max-width:760px;margin:var(--space-xl) auto 0;background:var(--surface-container);box-shadow:var(--shadow-paper);padding:clamp(24px,5vw,56px);position:relative}
+.sheet header{padding-bottom:var(--space-lg);border-bottom:var(--pen-width) solid var(--on-surface);margin-bottom:var(--space-xl)}
+.sheet .kicker{margin-bottom:var(--space-md)}
+.sheet .dek{font:700 22px/1.35 var(--font-hand);margin:var(--space-md) 0 0;color:var(--on-surface-variant)}
+.sheet p{margin:0 0 var(--space-md);max-width:66ch}
+.intro p:first-child{font-size:19px}
+
+.lesson{padding-top:var(--space-xl);margin-top:var(--space-xl);border-top:1.5px dashed var(--outline)}
+.lesson:first-of-type{border-top:0;margin-top:var(--space-lg)}
+.lesson h2{display:flex;gap:var(--space-lg);align-items:baseline;margin-bottom:var(--space-lg)}
+.lesson h2 .circled{font:700 30px/1 var(--font-script);flex:none;margin-left:6px}
+.part{margin-top:var(--space-lg)}
+.part .sticker{margin-bottom:var(--space-sm)}
+.part--learn{background:var(--surface-container-highest);padding:var(--space-lg);margin-top:var(--space-lg)}
+.part--learn p:last-child{margin-bottom:0}
+
+.closer{margin-top:var(--space-section);background:var(--secondary);padding:var(--space-lg) clamp(20px,4vw,36px);transform:rotate(-.4deg)}
+.closer p{font:700 24px/1.4 var(--font-hand);margin:0;color:var(--on-surface)}
+.back{margin-top:var(--space-xl);display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-md);align-items:center}
+
+/* site bar, matches the other field note pages */
+.bar{position:sticky;top:0;z-index:20;background:#f6f1e7;border-bottom:2.5px solid #1a1a17}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:12px}
+.bar a{color:#1a1a17;text-decoration:none}
+.bar__name{font:800 20px/1 "Bricolage Grotesque","Arial Black",system-ui,sans-serif;letter-spacing:-.01em}
+.bar__back{font:700 16px/1 var(--font-hand)}
+.bar__back:hover{color:var(--primary)}
+.toc{top:46px}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}.btn:hover{transform:none}}
+
+/* numbered steps inside a lesson */
+.steps{list-style:none;margin:var(--space-lg) 0;padding:0;display:grid;gap:var(--space-md)}
+.steps li{display:grid;grid-template-columns:36px 1fr;gap:var(--space-md);align-items:start;background:var(--surface-container-highest);padding:var(--space-md) var(--space-lg) var(--space-md) var(--space-md)}
+.steps .num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;font:700 22px/1 var(--font-script);border:var(--pen-width) solid var(--on-surface);background:var(--tertiary)}
+.steps p{margin:0}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="bar__name" href="/">Anmol Shrivastava</a>
+    <a class="bar__back" href="/#field-notes">All field notes</a>
+  </div>
+</header>
+
+
+<main class="article" id="stop-networking">
+  <nav class="toc" aria-label="Sections">
+    <div class="wrap row">
+      <a href="#l1">1. Start in the audience</a>
+      <a href="#l2">2. Reality check</a>
+      <a href="#l3">3. Make it trackable</a>
+      <a href="#l4">4. Count, then act</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+  <article class="sheet ink">
+    <header>
+      <div class="kicker"><span class="sticker sticker--kraft">Events, early-stage</span></div>
+      <h1 class="display">Stop networking. Start listening.</h1>
+      <p class="dek">Events are the most inefficiently used GTM channel for early-stage companies. Use them to collect frank market feedback, not to impress everyone in the room.</p>
+    </header>
+
+    <div class="intro">
+      <p>Events are expensive, and they're really hard to attribute. Try drawing a clean line from a booth to revenue and you'll see what I mean. A big company can live with that, because brand recall is a goal in itself. For an early-stage company it's a tougher question. If the money doesn't come back in a way you can measure, what are you actually getting out of being there?</p>
+      <p>Most people would say networking, partnerships and, if you're big enough, brand recall. All fair. But for a small team I think it makes more sense to go after smaller, incremental gains. And to make sure the whole thing doesn't end up as a photo op exercise with a couple of LinkedIn posts to show for it.</p>
+    </div>
+
+    <section class="lesson" id="l1">
+      <h2 class="h-md"><span class="circled">1</span><span>Start in the audience</span></h2>
+      <p>Before you spend money on a booth, go as part of the audience. Pick the events that cost you nothing, or close to nothing, and just watch how others do it.</p>
+      <p>Be choosy about which ones. Big generic events, or ones built around a broad function or industry, tend to blur together. You walk past a hundred stalls and learn very little about your own market. Niche events are much more useful. Think of events for AI marketers, or ones on AI in content and branding. The room is full of people selling to the same buyer as you, and some of those buyers are in the room too.</p>
+      <p>Sit in on the talks, walk the floor, catch the demos. Watch how others pitch and how they position their products and services, what they lead with and what they skip over quickly. You'll get a feel for the category faster than desk research will give you.</p>
+      <div class="part part--learn ink"><span class="sticker sticker--blue">Then</span>
+        <p>Take those learnings back and use them to plan your GTM and product roadmap. Only after that should you plan your own booth, free or paid. By then you know which rooms are worth being in, and what you want to say once you're there.</p></div>
+    </section>
+
+    <section class="lesson" id="l2">
+      <h2 class="h-md"><span class="circled">2</span><span>Treat it as a reality check</span></h2>
+      <p>Once you do show up as a participant, the most useful way to use an event is as a reality check on the business. You meet peer founders who are in the same boat as you. You see how others are going about product building and GTM, up close and without the polish of a case study.</p>
+      <p>If you're honest and frank with them, a bond forms almost right away. Founders, especially in India, crave feedback, and they rarely get it straight. Customers are polite. Friends and ex-colleagues are kind. Even investors often have their reasons to hold back. So when one founder tells another that a part of their pitch isn't landing, it usually gets taken as a favour.</p>
+    </section>
+
+    <section class="lesson" id="l3">
+      <h2 class="h-md"><span class="circled">3</span><span>Make it trackable</span></h2>
+      <p>The catch is that these conversations can easily stay feel-good and intellectual. You have a great chat over coffee and nothing changes on Monday. So we tracked it. This is roughly what we followed across the few events we picked.</p>
+      <ol class="steps">
+        <li><span class="num">1</span><p>Go in with 3 to 5 clearly written hypotheses or assumptions you want peers or industry leaders to weigh in on. Write them down internally before you leave.</p></li>
+        <li><span class="num">2</span><p>Ask peers for frank, no-filter feedback on your product or branding, and keep a record of it, including the bits that sting.</p></li>
+        <li><span class="num">3</span><p>Watch how other players run their demos, pitch and communicate. Note what works, and what makes people drift off.</p></li>
+        <li><span class="num">4</span><p>Ask veterans for the long-term view on live questions. For us that meant things like the build vs buy debate for vertical and horizontal AI, or whether marketing teams are building in-house creative teams or sticking with agency partners.</p></li>
+      </ol>
+      <div class="part part--learn ink"><span class="sticker sticker--blue">Why it matters</span>
+        <p>Secondary research usually won't give you these reality-check nuances. A report tells you what the market looks like. The founder at the next table tells you what it's actually like to sell into it.</p></div>
+    </section>
+
+    <section class="lesson" id="l4">
+      <h2 class="h-md"><span class="circled">4</span><span>Count, then act</span></h2>
+      <p>By the end of the event, the goal is to count how many responses and insights we've gathered against each of these. Then we take them back to the team and use them to brainstorm the GTM and product roadmap.</p>
+    </section>
+
+    <div class="closer ink">
+      <p>For an early-stage company, an event has paid off when you walk out with fewer untested assumptions than you walked in with.</p>
+    </div>
+
+    <div class="back">
+      <a class="btn ink" href="/#field-notes">&larr; Back to field notes</a>
+    </div>
+  </article>
+  </div>
+</main>
+
+</body>
+</html>
