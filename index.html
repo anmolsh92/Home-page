@@ -472,6 +472,10 @@ a.fn__card:hover{transform:translate(-2px,-2px) rotate(-.5deg)}
 .fn__sub{margin:0;padding:var(--space-4) var(--space-5) 0;font-size:16px;line-height:23px}
 .fn__foot{margin-top:auto;padding:var(--space-4) var(--space-5) var(--space-5)}
 .fn__soon{display:inline-block;font:700 12px/16px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;padding:var(--space-1) var(--space-3);border:var(--border-thin) dashed var(--c);border-radius:var(--radius-pill);color:var(--c)}
+/* Published field note: CTA in place of the "Coming soon" label */
+.fn__cta{display:inline-flex;align-items:center;gap:var(--space-2);font:700 12px/16px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;padding:var(--space-2) var(--space-4);border:var(--border-thin) solid var(--ink);border-radius:var(--radius-pill);background:var(--c);color:#fff;text-decoration:none;box-shadow:3px 3px 0 var(--pop);transition:transform .15s steps(2)}
+.fn__cta:hover{transform:translate(-1px,-1px) rotate(-.5deg)}
+.fn__cta:focus-visible{outline:2px dashed var(--focus);outline-offset:3px}
 .fn__card--soon{cursor:not-allowed;user-select:none}
 
 /* ---------- Responsive ---------- */
@@ -632,13 +636,13 @@ a.fn__card:hover{transform:translate(-2px,-2px) rotate(-.5deg)}
          to <a class="fn__card" href="/field-notes/<slug>/"> and drop the .fn__foot line.
          Card colours cycle by position (see .fn__card:nth-child rules). -->
     <div class="fn__grid">
-      <article class="fn__card fn__card--soon" aria-disabled="true">
+      <article class="fn__card">
         <div class="fn__top">
           <div class="fn__tags"><span class="tag">GTM</span><span class="tag">Retrospective</span></div>
           <h2 class="fn__title">The GTM Bets We'd Remake</h2>
         </div>
         <p class="fn__sub">An honest look at our key GTM calls, and what sharper anticipation and tighter tracking would have changed.</p>
-        <div class="fn__foot"><small class="fn__soon">Coming soon</small></div>
+        <div class="fn__foot"><a class="fn__cta" href="/field-notes/gtm-wildbits/">Read more <span aria-hidden="true">&rarr;</span></a></div>
       </article>
       <article class="fn__card fn__card--soon" aria-disabled="true">
         <div class="fn__top">

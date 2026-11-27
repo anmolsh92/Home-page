@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GTM Wildbits · GTM field notes · Anmol Shrivastava</title>
+<meta name="description" content="Five decisions from building a 0 to 1 AI platform at Nagent AI, what actually happened, and what we learned.">
+<meta property="og:title" content="GTM Wildbits">
+<meta property="og:description" content="Five decisions from building a 0 to 1 AI platform, and what they taught us.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Shantell+Sans:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap">
+<style>
+/* VOICE  a founder's field notebook, candid and plain, written in the margin
+   IDEA   a looseleaf sheet pinned on a teal desk
+   PICTURE the full sheet the GTM Wildbits card opens into
+   COLOUR and TYPE  Handwritten Style tokens, teal desk, paper, graphite ink
+   LAYOUT a single paper column with sticky section links */
+
+:root{
+  color-scheme:light;
+  --background:#a8c8bb;--surface-container-low:#9db8ae;--surface-container:#f8f2de;
+  --surface-container-high:#f8f5ee;--surface-container-highest:#fbf8f1;
+  --on-surface:#2a2420;--on-surface-variant:#4a423b;--on-surface-muted:#4a433c;--outline:#2a242040;
+  --primary:#2c4f9e;--on-primary:#fff;--secondary:#df6b3c;--tertiary:#dcc8a3;--button-fill:#b2c3dc;
+  --space-xs:4px;--space-sm:8px;--space-md:12px;--space-lg:24px;--space-xl:36px;--space-section:96px;
+  --shadow-paper:0 10px 20px -8px rgba(58,44,30,.22);--control-height:32px;--pen-width:2px;
+  --dur-quick:.12s;--dur-base:.15s;--dur-slow:.3s;
+  --ease-standard:cubic-bezier(.4,0,.2,1);--ease-spring:cubic-bezier(.2,.9,.25,1.12);--ease-enter:cubic-bezier(0,0,.2,1);
+  --font-script:"Kevin Sans Script","Caveat","Bradley Hand",cursive;
+  --font-hand:"Kevin Sans Hand","Patrick Hand","Bradley Hand",cursive;
+  --font-type:"Kevin Sans Type","Shantell Sans",system-ui,sans-serif;
+}
+:root[data-theme=light],:root[data-theme=dark]{color-scheme:light}
+*,*::before,*::after{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+body{margin:0;background:var(--background);color:var(--on-surface);font:400 17px/1.55 var(--font-hand);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--on-surface);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+a:hover{text-decoration-color:var(--primary)}
+::selection{background:var(--button-fill)}
+:focus-visible{outline:2px dashed var(--primary);outline-offset:3px}
+
+/* pen line */
+.ink{position:relative;border:var(--pen-width) solid var(--on-surface)}
+.ink::after{content:"";position:absolute;inset:-3px -1px -1px -3px;border:1.5px solid var(--on-surface);opacity:.45;transform:rotate(-.5deg);pointer-events:none}
+
+/* type */
+.display{font:700 clamp(56px,9vw,96px)/.95 var(--font-script);letter-spacing:-.025em;margin:0;text-wrap:balance}
+.h-lg{font:700 clamp(40px,6vw,60px)/1.02 var(--font-script);margin:0;text-wrap:balance}
+.h-md{font:700 36px/1.15 var(--font-script);margin:0;text-wrap:balance}
+.h-sm{font:700 30px/1 var(--font-script);margin:0}
+.label-lg{font:600 21px/1 var(--font-script)}
+.small{font:400 14px/1.43 var(--font-type);letter-spacing:.025em}
+.muted{color:var(--on-surface-muted)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:var(--space-sm);height:44px;padding:0 var(--space-lg);font:600 21px/1 var(--font-script);color:var(--on-surface);background:var(--button-fill);cursor:pointer;text-decoration:none;transition:transform var(--dur-quick) var(--ease-spring)}
+.btn:hover{transform:translateY(-1px) rotate(-.4deg)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px dashed var(--primary);outline-offset:4px}
+.btn--primary{background:var(--primary);color:var(--on-primary);font-weight:700}
+.btn--ghost{background:transparent;border-color:transparent;font:700 16px/1 var(--font-hand);height:44px;padding:0 var(--space-md);color:var(--on-surface)}
+.btn--ghost::after{display:none}
+.btn--ghost:hover{background:var(--surface-container-low)}
+
+/* stickers */
+.sticker{display:inline-flex;align-items:center;height:26px;padding:0 var(--space-sm);font:700 15px/1 var(--font-hand);border:var(--pen-width) solid var(--on-surface);background:var(--surface-container-highest);color:var(--on-surface)}
+.sticker--kraft{background:var(--tertiary)}
+.sticker--blue{background:var(--primary);color:var(--on-primary)}
+.sticker--riso{background:var(--secondary);font-size:19px;height:30px;transform:rotate(-3deg)}
+
+.circled{position:relative;display:inline-block;padding:0 8px}
+.circled::before{content:"";position:absolute;inset:-6px -8px;border:var(--pen-width) solid var(--secondary);border-radius:50%;transform:rotate(-6deg);pointer-events:none}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 max(5vw,16px)}
+
+
+
+/* article */
+.article{display:block;padding:var(--space-lg) 0 var(--space-section)}
+@keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.toc{position:sticky;top:0;z-index:2;background:var(--background);padding:var(--space-sm) 0;border-bottom:var(--pen-width) solid var(--on-surface)}
+.toc .row{display:flex;gap:var(--space-xs);overflow-x:auto;align-items:center}
+.toc a{flex:none;font:700 16px/1 var(--font-hand);text-decoration:none;padding:10px var(--space-md);min-height:44px;display:inline-flex;align-items:center}
+.toc a:hover{background:var(--surface-container-low)}
+@media(max-width:900px){.toc{position:static}}
+
+.sheet{max-width:760px;margin:var(--space-xl) auto 0;background:var(--surface-container);box-shadow:var(--shadow-paper);padding:clamp(24px,5vw,56px);position:relative}
+.sheet::before{content:"";position:absolute;left:clamp(10px,2.4vw,24px);top:56px;width:14px;height:14px;border-radius:50%;background:var(--background);box-shadow:0 140px 0 var(--background),0 280px 0 var(--background)}
+@media(max-width:600px){.sheet::before{display:none}}
+.sheet header{padding-bottom:var(--space-lg);border-bottom:var(--pen-width) solid var(--on-surface);margin-bottom:var(--space-xl)}
+.sheet .kicker{margin-bottom:var(--space-md)}
+.sheet .dek{font:700 22px/1.35 var(--font-hand);margin:var(--space-md) 0 0;color:var(--on-surface-variant)}
+.sheet p{margin:0 0 var(--space-md);max-width:66ch}
+.intro p:first-child{font-size:19px}
+
+.lesson{padding-top:var(--space-xl);margin-top:var(--space-xl);border-top:1.5px dashed var(--outline)}
+.lesson:first-of-type{border-top:0;margin-top:var(--space-lg)}
+.lesson h2{display:flex;gap:var(--space-lg);align-items:baseline;margin-bottom:var(--space-lg)}
+.lesson h2 .circled{font:700 30px/1 var(--font-script);flex:none;margin-left:6px}
+.part{margin-top:var(--space-lg)}
+.part .sticker{margin-bottom:var(--space-sm)}
+.part--learn{background:var(--surface-container-highest);padding:var(--space-lg);margin-top:var(--space-lg)}
+.part--learn p:last-child{margin-bottom:0}
+
+.closer{margin-top:var(--space-section);background:var(--secondary);padding:var(--space-lg) clamp(20px,4vw,36px);transform:rotate(-.4deg)}
+.closer p{font:700 24px/1.4 var(--font-hand);margin:0;color:var(--on-surface)}
+.back{margin-top:var(--space-xl);display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--space-md);align-items:center}
+
+/* site bar, matches the other field note pages */
+.bar{position:sticky;top:0;z-index:20;background:#f6f1e7;border-bottom:2.5px solid #1a1a17}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:12px;padding-bottom:12px}
+.bar a{color:#1a1a17;text-decoration:none}
+.bar__name{font:800 20px/1 "Bricolage Grotesque","Arial Black",system-ui,sans-serif;letter-spacing:-.01em}
+.bar__back{font:700 16px/1 var(--font-hand)}
+.bar__back:hover{color:var(--primary)}
+.toc{top:46px}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}.btn:hover{transform:none}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="bar__name" href="/">Anmol Shrivastava</a>
+    <a class="bar__back" href="/#field-notes">All field notes</a>
+  </div>
+</header>
+
+
+<main class="article" id="gtm-wildbits">
+  <nav class="toc" aria-label="Sections">
+    <div class="wrap row">
+            <a href="#l1">1. Demand vs adoption</a>
+      <a href="#l2">2. Vibe coding</a>
+      <a href="#l3">3. Over-automation</a>
+      <a href="#l4">4. Features vs UX</a>
+      <a href="#l5">5. ICP focus</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+  <article class="sheet ink">
+    <header>
+      <div class="kicker"><span class="sticker sticker--kraft">GTM retrospective</span></div>
+      <h1 class="display">GTM Wildbits</h1>
+      <p class="dek">Five decisions from building a 0 to 1 AI platform, and what they taught us</p>
+    </header>
+
+    <div class="intro">
+      <p>Over the past year and a bit at Nagent, we made a lot of calls about what to build, who to sell to and how to work. Some held up. A few didn't, and those are the ones worth writing down.</p>
+      <p>These aren't the big market lessons most people now agree on, like humans and agents working together or the shift toward multiplayer AI. They're narrower. They come from our own product and GTM journey, in a market that kept moving while we were building for it.</p>
+    </div>
+
+    <section class="lesson" id="l1">
+      <h2 class="h-md"><span class="circled">1</span><span>Wanting AI content isn't the same as wanting to make it yourself</span></h2>
+      <div class="part"><span class="sticker">The decision</span>
+        <p>We built a model-agnostic platform across text, image, voice and video, and we leaned hardest into video. Very few players were working on agentic video workflows. Video also uses a huge number of tokens, and we expected the models to improve quickly.</p></div>
+      <div class="part"><span class="sticker">What happened</span>
+        <p>The technology bet paid off. Video models got dramatically better, the outputs started looking cinematic and realistic, and high-end brands began showing real interest.</p>
+        <p>But we'd mixed up two different things. Demand for AI-generated content isn't the same as being ready to adopt a DIY agent to create it. Large FMCG and e-commerce companies clearly had content bottlenecks, but most of that work still went through external agencies. We badly underestimated the inertia that builds up after years, sometimes decades, of working that way. We also should have talked much more openly about the long-term advantage a brand gets from building its own in-house creative team on tools like ours.</p></div>
+      <div class="part part--learn ink"><span class="sticker sticker--blue">What we learned</span>
+        <p>Even after we made prompting easier, many customers didn't put in the disciplined effort that good output needs. That's when we added a second business model, AI-native services, for customers who want these workflows but need a human to run them. We tracked how much of each delivery came from Nagent's own platform rather than off-the-shelf tools, and we wanted that share to keep growing.</p></div>
+    </section>
+
+    <section class="lesson" id="l2">
+      <h2 class="h-md"><span class="circled">2</span><span>Vibe coding changed the category under us</span></h2>
+      <div class="part"><span class="sticker">The decision</span>
+        <p>We started with a no-code agent builder made of pre-defined architectural components. We assumed the big opportunity was making it easy for non-technical domain experts to build agents.</p></div>
+      <div class="part"><span class="sticker">What happened</span>
+        <p>Agents were the big story through 2024 and most of 2025. Then, around late 2025, vibe coding took off. Code-generation platforms made it far easier to build custom agents and full applications.</p>
+        <p>Users started asking for flexible UI and UX, custom analytics dashboards and private deployment. We were solving how to create an agent while the market was moving toward complete applications with agents built into them.</p></div>
+      <div class="part part--learn ink"><span class="sticker sticker--blue">What we learned</span>
+        <p>Changes in the underlying technology can change the product category itself, and we needed to respond faster. The direction we eventually took was moving from an agent builder to a full-stack environment for building agentic applications. In it, users ideate, experiment and iterate, then turn a validated spec into a deployable app with code they can export.</p></div>
+    </section>
+
+    <section class="lesson" id="l3">
+      <h2 class="h-md"><span class="circled">3</span><span>We automated too much, and quality paid for it</span></h2>
+      <div class="part"><span class="sticker">The decision</span>
+        <p>When we started using AI internally, we focused hard on automation. We let AI make more of the calls that need judgment and taste, and kept humans mainly to catch errors or obvious drift, not the finer nuances.</p></div>
+      <div class="part"><span class="sticker">What happened</span>
+        <p>We hadn't planned human judgment into the process well enough. In some cases the final output suffered, and some of it was what you'd fairly call AI slop.</p></div>
+      <div class="part part--learn ink"><span class="sticker sticker--blue">What we learned</span>
+        <p>It's easy to get caught up in the FOMO around stories like one person running a whole sales and marketing stack. The real aim is to get as much out of AI as possible without giving up quality, judgment or accountability. Humans should stay meaningfully involved wherever their judgment adds value.</p>
+        <p>So we turned the approach around. We stopped asking "what can we automate?" first. Instead, we defined the quality we wanted for each piece of work, whether research, a social post or a blog, and benchmarked it against the best human-led version. Only then did we look at which steps in between could be automated, such as ideation, topic selection, research, first drafts, supporting assets and execution. The bar for the final output stayed where it was.</p></div>
+    </section>
+
+    <section class="lesson" id="l4">
+      <h2 class="h-md"><span class="circled">4</span><span>Features don't drive adoption on their own</span></h2>
+      <div class="part"><span class="sticker">The decision</span>
+        <p>As a small team with limited resources, we put most of our effort into strong capabilities and shipping features fast. We were confident that technical depth would turn into adoption.</p></div>
+      <div class="part"><span class="sticker">What happened</span>
+        <p>Some of what we built matched, and in places beat, what leading global products offered. But we'd underinvested in what makes those capabilities usable, namely UI and UX, onboarding, reliability, simple workflows and the overall experience.</p></div>
+      <div class="part part--learn ink"><span class="sticker sticker--blue">What we learned</span>
+        <p>Experience, reliability and simplicity matter just as much as the capability underneath. Moving fast is good. It just shouldn't become a reason to ship before the rest of the product is ready.</p></div>
+    </section>
+
+    <section class="lesson" id="l5">
+      <h2 class="h-md"><span class="circled">5</span><span>We didn't narrow the ICP quickly enough, or test why we chose it</span></h2>
+      <div class="part"><span class="sticker">The decision</span>
+        <p>We first went after CMOs at large FMCG, e-commerce and D2C companies with ₹500 to 1,000 Cr+ in annual revenue and heavy content needs. We thought their content bottlenecks made them natural buyers for AI-led content creation.</p></div>
+      <div class="part"><span class="sticker">What happened</span>
+        <p>The problem was real, but adoption was slower than we expected. These are hierarchical organisations with several layers of approval, from the content lead to the brand lead to the CMO. Add the general caution around AI content, plus a fear that letting everyone make content could go wrong, and decisions moved very slowly. In practice there was also less appetite than we'd assumed for bringing capabilities in-house. Teams worried about their own people's creative skills and about holding them accountable. We should have picked up those signals earlier and addressed them in our messaging and in how we built confidence.</p>
+        <p>Next we tried founders of mid-sized D2C brands, the kind of brand that features on Shark Tank. They decided faster, and for them marketing budget was a real constraint, not just a chance to save money. But many were wary of AI content because their brands were still young, and they worried it would cost them authenticity. Some sub-industries were also much more sensitive to AI content than others, and we didn't narrow our targeting along that line either. There was no easy ICP. Targeting needed far more careful thought and planning than we gave it.</p>
+        <p>In the end, we kept moving between attractive segments instead of committing to a small number of hypotheses.</p></div>
+      <div class="part part--learn ink"><span class="sticker sticker--blue">What we learned</span>
+        <p>We should have picked one or two clear ICPs, written our assumptions down and tested them properly through customer conversations, rather than chasing whichever segment looked best at the time.</p>
+        <p>We also learned that enterprise adoption needs more than good content generation. It needs brand governance, workflows built around each customer, checks against hallucination and versioned asset management. Those should have been the core of the platform from the start.</p></div>
+    </section>
+
+    <div class="closer ink">
+      <p>Looking back, the technology mostly did what we expected. What we read too slowly was how people would respond to it, including buyers, users and our own team.</p>
+    </div>
+
+    <div class="back">
+      <a class="btn ink" href="/#field-notes">← Back to field notes</a>
+    </div>
+  </article>
+  </div>
+</main>
+
+</body>
+</html>
