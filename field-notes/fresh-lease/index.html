@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><style>
+:root { color-scheme: light; --background: #a8c8bb; --surface-container-low: #9db8ae; --surface-container: #f8f2de; --surface-container-high: #f8f5ee; --surface-container-highest: #fbf8f1; --on-surface: #2a2420; --on-surface-variant: #4a423b; --on-surface-muted: #4a433c; --outline: #2a242040; --primary: #2c4f9e; --on-primary: #fff; --secondary: #df6b3c; --tertiary: #dcc8a3; --button-fill: #b2c3dc; --space-xs: 4px; --space-sm: 8px; --space-md: 12px; --space-lg: 24px; --space-xl: 36px; --space-section: 96px; --shadow-paper: 0 10px 20px -8px rgba(58,44,30,.22); --pen-width: 2px; --dur-quick: .12s; --ease-spring: cubic-bezier(.2,.9,.25,1.12); --font-script: "Kevin Sans Script","Caveat","Bradley Hand",cursive; --font-hand: "Kevin Sans Hand","Patrick Hand","Bradley Hand",cursive; --font-type: "Kevin Sans Type","Shantell Sans",system-ui,sans-serif; }
+*, ::before, ::after { box-sizing: border-box; min-width: 0px; }
+html { scroll-padding-top: 72px; scroll-behavior: smooth; }
+body { margin: 0px; background: var(--background); color: var(--on-surface); font: 400 17px/1.55 var(--font-hand); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+a { color: var(--on-surface); text-decoration: underline 2px; text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--primary); }
+::selection { background: var(--button-fill); }
+:focus-visible { outline: 2px dashed var(--primary); outline-offset: 3px; }
+.ink { position: relative; border: var(--pen-width) solid var(--on-surface); }
+.ink::after { content: ""; position: absolute; inset: -3px -1px -1px -3px; border: 1.5px solid var(--on-surface); opacity: 0.45; transform: rotate(-0.5deg); pointer-events: none; }
+.display { font: 700 clamp(44px,7vw,72px)/1 var(--font-script); letter-spacing: -0.025em; margin: 0px; text-wrap: balance; }
+.h-md { font: 700 36px/1.15 var(--font-script); margin: 0px; text-wrap: balance; }
+.btn { display: inline-flex; align-items: center; gap: var(--space-sm); height: 44px; padding: 0 var(--space-lg); font: 600 21px/1 var(--font-script); color: var(--on-surface); background: var(--button-fill); cursor: pointer; text-decoration: none; transition: transform var(--dur-quick) var(--ease-spring); }
+.btn:hover { transform: translateY(-1px) rotate(-0.4deg); }
+.sticker { display: inline-flex; align-items: center; height: 26px; padding: 0 var(--space-sm); font: 700 15px/1 var(--font-hand); border: var(--pen-width) solid var(--on-surface); background: var(--surface-container-highest); color: var(--on-surface); }
+.sticker--kraft { background: var(--tertiary); }
+.sticker--blue { background: var(--primary); color: var(--on-primary); }
+.circled { position: relative; display: inline-block; padding: 0px 8px; }
+.circled::before { content: ""; position: absolute; inset: -6px -8px; border: var(--pen-width) solid var(--secondary); border-radius: 50%; transform: rotate(-6deg); pointer-events: none; }
+.wrap { max-width: 1080px; margin: 0px auto; padding: 0px max(5vw, 16px); }
+.article { display: block; padding: var(--space-lg) 0 var(--space-section); }
+.toc { position: sticky; top: 46px; z-index: 2; background: var(--background); padding: var(--space-sm) 0; border-bottom: var(--pen-width) solid var(--on-surface); }
+.toc .row { display: flex; gap: var(--space-xs); overflow-x: auto; align-items: center; }
+.toc a { flex: 0 0 auto; font: 700 16px/1 var(--font-hand); text-decoration: none; padding: 10px var(--space-md); min-height: 44px; display: inline-flex; align-items: center; }
+.toc a:hover { background: var(--surface-container-low); }
+@media (max-width: 900px) { .toc { position: static; } }
+.sheet { max-width: 760px; margin: var(--space-xl) auto 0; background: var(--surface-container); box-shadow: var(--shadow-paper); padding: clamp(24px, 5vw, 56px); position: relative; }
+.sheet header { padding-bottom: var(--space-lg); border-bottom: var(--pen-width) solid var(--on-surface); margin-bottom: var(--space-xl); }
+.sheet .kicker { margin-bottom: var(--space-md); }
+.sheet .dek { font: 700 22px/1.35 var(--font-hand); margin: var(--space-md) 0 0; color: var(--on-surface-variant); }
+.sheet p { margin: 0 0 var(--space-md); max-width: 66ch; }
+.intro p:first-child { font-size: 19px; }
+.summary { margin: 0 0 var(--space-md); padding-left: 22px; display: grid; gap: var(--space-sm); font-size: 18px; max-width: 66ch; }
+.hl { background: linear-gradient(transparent 12%, rgba(223,107,60,.32) 12%, rgba(223,107,60,.32) 88%, transparent 88%); color: inherit; padding: 0 2px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.summary li::marker { color: var(--secondary); }
+.lesson { padding-top: var(--space-xl); margin-top: var(--space-xl); border-top: 1.5px dashed var(--outline); }
+.lesson:first-of-type { border-top: 0px; margin-top: var(--space-lg); }
+.lesson h2 { display: flex; gap: var(--space-lg); align-items: baseline; margin-bottom: var(--space-lg); }
+.lesson h2 .circled { font: 700 30px/1 var(--font-script); flex: 0 0 auto; margin-left: 6px; }
+.part { margin-top: var(--space-lg); }
+.part .sticker { margin-bottom: var(--space-sm); }
+.part--learn { background: var(--surface-container-highest); padding: var(--space-lg); margin-top: var(--space-lg); }
+.part--learn p:last-child { margin-bottom: 0px; }
+.closer { margin-top: var(--space-section); background: rgb(247, 211, 191); padding: var(--space-lg) clamp(20px,4vw,36px); transform: rotate(-0.4deg); }
+.closer p { font: 700 24px/1.4 var(--font-hand); margin: 0px; color: var(--on-surface); }
+.back { margin-top: var(--space-xl); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-md); align-items: center; }
+.bar { position: sticky; top: 0px; z-index: 20; background: rgb(246, 241, 231); border-bottom: 2.5px solid rgb(26, 26, 23); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; }
+.bar a { color: rgb(26, 26, 23); text-decoration: none; }
+.bar__name { font: 800 20px / 1 "Bricolage Grotesque", "Arial Black", system-ui, sans-serif; letter-spacing: -0.01em; }
+.bar__back { font: 700 16px/1 var(--font-hand); }
+.bar__back:hover { color: var(--primary); }
+@media (prefers-reduced-motion: reduce) { *, ::before, ::after { transition: none !important; } html { scroll-behavior: auto; } .btn:hover { transform: none; } }
+.steps { list-style: none; margin: var(--space-lg) 0; padding: 0px; display: grid; gap: var(--space-md); }
+.steps li { display: grid; grid-template-columns: 36px 1fr; gap: var(--space-md); align-items: start; background: var(--surface-container-highest); padding: var(--space-md) var(--space-lg) var(--space-md) var(--space-md); }
+.steps .num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; font: 700 22px/1 var(--font-script); border: var(--pen-width) solid var(--on-surface); background: var(--tertiary); }
+.steps p { margin: 0px; }
+.reasons { list-style: none; margin: var(--space-lg) 0; padding: 0px; display: grid; gap: var(--space-md); }
+.reasons li { background: var(--surface-container-highest); padding: var(--space-md) var(--space-lg); }
+.reasons li p { margin: 0px; }
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Giving the company a new lease of life · GTM field notes · Anmol Shrivastava</title>
+<meta name="description" content="How Nagent AI went from a no-code agent builder to a multiplayer AI platform for marketing teams, after a cash flow crisis took the team from 24 people to four.">
+<meta property="og:title" content="Giving the company a new lease of life through a product revamp">
+<meta property="og:description" content="Steering a startup through a cash flow crisis and rebuilding the product from what the market had taught us.">
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&amp;family=Patrick+Hand&amp;family=Shantell+Sans:wght@400;700&amp;family=Bricolage+Grotesque:opsz,wght@12..96,800&amp;display=swap">
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <a class="bar__name" href="https://anmolshrivastava.in/">Anmol Shrivastava</a>
+    <a class="bar__back" href="https://anmolshrivastava.in/#field-notes">All field notes</a>
+  </div>
+</header>
+
+<main class="article" id="new-lease-of-life">
+  <nav class="toc" aria-label="Sections">
+    <div class="wrap row">
+      <a href="#l1">1. Where I sat</a>
+      <a href="#l2">2. The bet we made</a>
+      <a href="#l3">3. What the market told us</a>
+      <a href="#l4">4. Where we lost steam</a>
+      <a href="#l5">5. Where I stepped in</a>
+      <a href="#l6">6. What came out of it</a>
+      <a href="#l7">7. Looking back</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+  <article class="sheet ink">
+    <header>
+      <div class="kicker"><span class="sticker sticker--kraft">Turnaround, product</span></div>
+      <h1 class="display">Giving the company a new lease of life through a product revamp</h1>
+      <p class="dek">How Nagent AI went from a no-code agent builder to a multiplayer AI platform for marketing teams, after a cash flow crisis took the team from 24 people to four.</p>
+    </header>
+
+    <div class="intro">
+      <ul class="summary">
+        <li>I've seen Nagent AI from almost every stage. I joined as the fourth employee, after the three founders and our R&amp;D lead, and was part of the team as it <mark class="hl">scaled to 24 people</mark>.</li>
+        <li>Then I was there as it <mark class="hl">shrank back to four</mark>, after a cash flow crisis and the exit of two of our three founders.</li>
+        <li>At the time, our product was a no-code agent builder with a set of content creation agents, plus a managed services vertical that made AI content for clients.</li>
+        <li>It got a little traction, but then vibe coding exploded. Once anyone could build a custom app, our no-code agent builder lost its shine.</li>
+        <li>Working with our founder and CEO and the two colleagues who stayed, I helped <mark class="hl">rebuild the product from scratch as a multiplayer AI platform for marketing teams</mark>, with a suite of agents that work alongside the people on the team. We built it around what a year of GTM conversations had taught us.</li>
+        <li>It isn't perfect or highly scalable yet, but it gave the company a restart, <mark class="hl">brought in fresh funding</mark> and gave us a new lease of life to build on.</li>
+      </ul>
+    </div>
+
+    <section class="lesson" id="l1">
+      <h2 class="h-md"><span class="circled">1</span><span>Where I sat</span></h2>
+      <p>I held two roles, Chief of Staff and GTM Lead, and both mattered a lot in how this story played out.</p>
+      <p>As GTM Lead I was in the room for most of our market conversations, so I knew what was selling, what wasn't, and why. As Chief of Staff I worked across every team, which gave me a working sense of how the product actually got built. <mark class="hl">When the company needed rebuilding, it needed both of those perspectives.</mark></p>
+    </section>
+
+    <section class="lesson" id="l2">
+      <h2 class="h-md"><span class="circled">2</span><span>The bet we made</span></h2>
+      <p>In early 2025 the founders decided to focus on applications, specifically agentic workflows for video and content creation. The reasoning made sense at the time.</p>
+      <ul class="summary">
+        <li>Hardly anyone in India was doing this at scale.</li>
+        <li>The large models were expected to improve very quickly.</li>
+        <li>These use cases burn tokens fast, so ticket sizes could grow quickly.</li>
+      </ul>
+      <p>Alongside the platform we ran a managed services model. We'd create AI content for clients in-house using our own platform and hand it over. This was meant to be a stopgap, a kind of training phase, until clients were ready to run these agentic workflows themselves.</p>
+    </section>
+
+    <section class="lesson" id="l3">
+      <h2 class="h-md"><span class="circled">3</span><span>What the market told us</span></h2>
+      <p>We did hundreds of demos and pitches, went to events and spoke with brand, marketing and content teams at top FMCG companies. After all that, the signal was fairly clear. India has real demand for AI-generated content, but <mark class="hl">very little appetite yet for doing it yourself with content creation agents</mark>.</p>
+      <p>Managed services was also hurting us in two ways.</p>
+      <ul class="summary">
+        <li>It ate into the creative bandwidth we needed for our own marketing.</li>
+        <li>It muddied the pitch. We'd present the agents and managed services together, and almost straight away the conversation would turn to managed services pricing, volumes and commitments. We rarely got real feedback on the agents, or a proper chance to show people the value they could add.</li>
+      </ul>
+      <p>We were slow to accept this, but eventually we did. Managed services became a standalone offering with clear conditions. We'd only take on work with a volume commitment, and only if the team had bandwidth left after our internal needs were met.</p>
+    </section>
+
+    <section class="lesson" id="l4">
+      <h2 class="h-md"><span class="circled">4</span><span>Where we lost steam</span></h2>
+      <p>Besides the ready-made content agents, we had a no-code agent builder. Any team, in any function, could use it to build agents or AI-powered automations for their own workflows. It got some traction, though slowly. Then, just as it was picking up, vibe coding exploded. Building software became so easy that people no longer wanted to stop at agents. They wanted custom apps with their own UI and UX, dashboards, self-hosting and a lot more.</p>
+      <p>Looking back, I think <mark class="hl">this is where we were slowest to react to the changing landscape</mark>. Add the content agents not finding a market yet, plus some lapses in how we executed, and the business lost momentum. By mid-2026 we had very little runway left and a lot of payables at risk. We had to let people go to bring the burn down, and two of our three founders chose to leave too, with a short transition window for continuity and governance.</p>
+      <p>At that point there wasn't much left to hold on to. We had little funding, what we'd built didn't hold much value anymore, and we had neither the time nor the resources to build something new the usual way. <mark class="hl">From 24 people we were down to four.</mark> <mark class="hl">The company could have shut down any week, with nothing to salvage.</mark></p>
+    </section>
+
+    <section class="lesson" id="l5">
+      <h2 class="h-md"><span class="circled">5</span><span>Where I stepped in</span></h2>
+      <p><mark class="hl">This is the stretch I'm proudest of.</mark> Along with our founder and CEO, I chose to stay and fight for it.</p>
+      <p>We started by pulling together everything our GTM had taught us over the past year or so. That meant what had real demand, what could sell right away, and which pain points kept coming up in conversations with marketing teams. My time as GTM Lead meant most of that knowledge was already in my head and my notes, so turning it into a clear brief for what to build was quick.</p>
+      <p>Then we built it ourselves. With no in-house tech team left, <mark class="hl">the four of us did the building</mark>, with occasional help from technical friends and ex-colleagues. This is where my Chief of Staff years paid off. I'd spent enough time with our product and engineering teams to understand how the pieces fitted together, so I could get hands-on instead of waiting for a tech team we no longer had. We turned the platform into a multiplayer AI collaboration space for marketing teams, with a suite of agents that work alongside the people on the team.</p>
+      <p>Through all of this I also helped hold the company together through the transition and reshape how a four-person organisation would work, which looks very different from running one with 24.</p>
+    </section>
+
+    <section class="lesson" id="l6">
+      <h2 class="h-md"><span class="circled">6</span><span>What came out of it</span></h2>
+      <p>The new platform has real limitations, especially on the infrastructure side, and it isn't built to scale yet. But it gave us something to take to customers and investors, and some breathing room to keep fighting.</p>
+      <p><mark class="hl">Our hypothesis turned out to be right.</mark> We started getting traction and closed a couple of good conversions. That helped when we went back to investors, and <mark class="hl">we eventually closed a fresh raise</mark>. We're now using it to go deep again on product, GTM and rebuilding the team.</p>
+    </section>
+
+    <section class="lesson" id="l7">
+      <h2 class="h-md"><span class="circled">7</span><span>Looking back</span></h2>
+      <div class="closer ink" style="margin-top: var(--space-lg)">
+        <p>To sum it up, the turnaround came from refusing to give up. We stuck together as a team of four, used what the market had already told us, read where the technology was heading, and got our hands dirty building. That gave the company something worth fighting for, and a second shot.</p>
+      </div>
+    </section>
+
+    <div class="back">
+      <a class="btn ink" href="https://anmolshrivastava.in/#field-notes">← Back to field notes</a>
+    </div>
+  </article>
+  </div>
+</main>
+
+</body></html>
