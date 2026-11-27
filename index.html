@@ -7,6 +7,7 @@
 <meta name="description" content="Anmol Shrivastava: GTM lead and chief of staff. Portfolio, writing and field notes on building with AI.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500..700&family=Patrick+Hand&family=Shantell+Sans:wght@400;700&display=swap">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=excon@500&display=swap"><link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=ranade@300&display=swap">
 <style>
 /*DS-START*/
 /* Intellectual & Fun tokens. Light mode only. */
@@ -407,10 +408,9 @@ a.pin:active .pin__paper{box-shadow:none}
 
 /* ---------- Writings: folder placards, 3 rows, horizontal scroll ---------- */
 .post{scroll-snap-align:start;text-decoration:none;gap:var(--space-3);padding:var(--space-5) var(--space-5) var(--space-4);min-height:150px;transition:transform .12s steps(3),box-shadow .12s steps(3)}
-.post::before{background:var(--tab,var(--lemon)) !important;width:110px !important}
 .post:hover{transform:translate(-2px,-2px);box-shadow:var(--shadow-hard-lg)}
 .post:active{transform:translate(3px,3px);box-shadow:none}
-.post h3{margin:0;font-family:var(--font-display);font-weight:700;font-size:21px;line-height:25px}
+.post h3{margin:0;font-family:"Excon",var(--font-display);font-weight:500;font-size:22px;line-height:27px;letter-spacing:-.005em}
 .post__meta{display:flex;align-items:center;justify-content:flex-end;gap:var(--space-3);margin-top:auto;color:var(--ink-muted)}
 .post__meta .mono{color:var(--ink)}
 /* ---------- Writings: four fixed headers, one sideways row each ---------- */
@@ -419,7 +419,7 @@ a.pin:active .pin__paper{box-shadow:none}
 .cat__head{display:flex;align-items:center;gap:var(--space-3)}
 .cat__chip{flex:none;width:24px;height:24px;border:var(--border-thick) solid var(--outline);border-radius:7px;background:var(--tab);box-shadow:2px 2px 0 var(--outline);transform:rotate(-6deg)}
 .cat__title{margin:0;font:700 28px/1.1 var(--font-display)}
-.cat__row{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:34px 10px 18px 4px;margin:0 -10px 0 -4px}
+.cat__row{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 10px 18px 4px;margin:0 -10px 0 -4px}
 .cat__row::-webkit-scrollbar{height:10px}
 .cat__row::-webkit-scrollbar-thumb{background:var(--ink);border-radius:10px}
 .cat__row::-webkit-scrollbar-track{background:var(--surface-sunk);border-radius:10px}
@@ -468,8 +468,8 @@ a.fn__card:hover{transform:translate(-2px,-2px) rotate(-.5deg)}
 .fn__tags{display:flex;flex-wrap:wrap;gap:var(--space-2)}
 .fn__top .tag{background:var(--pop);color:var(--ink);border:var(--border-thin) solid var(--ink)}
 .fn__top .tag + .tag{background:#fff}
-.fn__title{margin:0;font-family:var(--font-display);font-size:32px;line-height:1.02;font-weight:700;color:#fff}
-.fn__sub{margin:0;padding:var(--space-4) var(--space-5) 0;font-size:16px;line-height:23px}
+.fn__title{margin:0;font-family:"Excon",var(--font-display);font-size:32px;line-height:1.08;font-weight:500;letter-spacing:-.01em;color:#fff}
+.fn__sub{margin:0;padding:var(--space-4) var(--space-5) 0;font-family:"Ranade",var(--font-sans);font-weight:300;font-size:17px;line-height:25px}
 .fn__foot{margin-top:auto;padding:var(--space-4) var(--space-5) var(--space-5)}
 .fn__soon{display:inline-block;font:700 12px/16px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;padding:var(--space-1) var(--space-3);border:var(--border-thin) dashed var(--c);border-radius:var(--radius-pill);color:var(--c)}
 /* Published field note: CTA in place of the "Coming soon" label */
@@ -879,7 +879,7 @@ function renderCats(data) {
     return `<section class="cat" aria-labelledby="cat-${c.id}">
     <div class="cat__head" style="--tab:var(--${c.tab})"><span class="cat__chip" aria-hidden="true"></span><h3 class="cat__title" id="cat-${c.id}">${esc(c.label)}</h3></div>
     <div class="cat__row" tabindex="0" aria-label="${esc(c.label)}, scroll sideways for more">${list.map(w => `
-      <a class="placard placard--tab post" style="--tab:var(--${c.tab})" href="${esc(w.url)}" target="_blank" rel="noopener">
+      <a class="placard post" style="--tab:var(--${c.tab})" href="${esc(w.url)}" target="_blank" rel="noopener">
         <h3>${esc(w.title)}</h3>
         <div class="post__meta"><span class="proj__arrow" style="width:36px;height:36px" aria-hidden="true">${arrow}</span></div>
       </a>`).join('')}
